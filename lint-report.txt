@@ -1,0 +1,120 @@
+﻿
+> badhraleads@0.1.0 lint
+> eslint
+
+
+D:\Bhadraleads\components\EnquiryModal.tsx
+  53:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Bhadraleads\components\EnquiryModal.tsx:53:7
+  51 |   useEffect(() => {
+  52 |     if (user) {
+> 53 |       setName((prev) => prev || user.name || "");
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  54 |       setEmail((prev) => prev || user.email || "");
+  55 |     }
+  56 |   }, [user]);  react-hooks/set-state-in-effect
+
+D:\Bhadraleads\components\ServiceCard.tsx
+  55:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\Bhadraleads\components\ServiceCard.tsx:55:14
+  53 |
+  54 |           <span className="absolute bottom-4 left-4 grid size-11 place-items-center rounded-xl bg-gradient-to-br from-gold-deep via-gold to-gold-light text-brand-strong shadow-gold">
+> 55 |             <Icon className="size-5" aria-hidden="true" />
+     |              ^^^^ This component is created during render
+  56 |           </span>
+  57 |         </div>
+  58 |
+
+D:\Bhadraleads\components\ServiceCard.tsx:18:16
+  16 | /** Premium service card ΓÇö opens the detail modal on click / Enter. */
+  17 | export function ServiceCard({ service, index, onOpen }: ServiceCardProps) {
+> 18 |   const Icon = getServiceIcon(service.icon);
+     |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The component is created during render here
+  19 |
+  20 |   return (
+  21 |     <motion.article  react-hooks/static-components
+
+D:\Bhadraleads\components\Services.tsx
+  64:18  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\Bhadraleads\components\Services.tsx:64:18
+  62 |
+  63 |               <span className="absolute left-5 top-5 grid size-11 place-items-center rounded-xl bg-gradient-to-br from-gold-deep via-gold to-gold-light text-brand-strong shadow-gold">
+> 64 |                 <Icon className="size-5" aria-hidden="true" />
+     |                  ^^^^ This component is created during render
+  65 |               </span>
+  66 |
+  67 |               <span className="absolute right-14 top-5 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white backdrop-blur">
+
+D:\Bhadraleads\components\Services.tsx:44:26
+  42 |
+  43 | function ServiceModal({ service, onClose, onEnquire }: ServiceModalProps) {
+> 44 |   const Icon = service ? getServiceIcon(service.icon) : BadgeCheck;
+     |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The component is created during render here
+  45 |
+  46 |   return (
+  47 |     <Dialog open={Boolean(service)} onOpenChange={(open) => !open && onClose()}>  react-hooks/static-components
+
+D:\Bhadraleads\components\WhatsAppButton.tsx
+   4:10  warning  'MessageCircle' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+   9:10  warning  'Button' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  58:19  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Bhadraleads\components\WhatsAppButton.tsx:58:19
+  56 |   const [mounted, setMounted] = useState(false);
+  57 |
+> 58 |   useEffect(() => setMounted(true), []);
+     |                   ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  59 |
+  60 |   if (!mounted || dismissed) return null;
+  61 |  react-hooks/set-state-in-effect
+
+D:\Bhadraleads\components\WhatsAppLink.tsx
+  3:10  warning  'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  3:21  warning  'useState' is defined but never used          @typescript-eslint/no-unused-vars
+  4:10  warning  'X' is defined but never used                 @typescript-eslint/no-unused-vars
+  5:10  warning  'cn' is defined but never used                @typescript-eslint/no-unused-vars
+  6:10  warning  'WHATSAPP_DISPLAY' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Bhadraleads\hooks\useGoogleAuth.ts
+  26:16  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Bhadraleads\hooks\useGoogleAuth.ts:26:16
+  24 |     try {
+  25 |       const raw = window.sessionStorage.getItem(STORAGE_KEY);
+> 26 |       if (raw) setUser(JSON.parse(raw) as AuthUser);
+     |                ^^^^^^^ Avoid calling setState() directly within an effect
+  27 |     } catch {
+  28 |       /* ignore malformed storage */
+  29 |     }  react-hooks/set-state-in-effect
+
+D:\Bhadraleads\lib\analytics.ts
+  48:5  warning  Unused eslint-disable directive (no problems were reported from 'no-console')
+
+Γ£û 13 problems (5 errors, 8 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+

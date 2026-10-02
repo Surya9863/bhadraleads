@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   BADHRALEADS design tokens — deep navy · off-white · premium gold accent
+   ========================================================================== */
+
+:root {
+  --background: #f7f8fb;
+  --foreground: #0b1f3a;
+
+  --brand: #0b1f3a;
+  --brand-strong: #081830;
+  --brand-soft: #12305a;
+  --brand-light: #1c4a86;
+
+  --gold: #c9972b;
+  --gold-light: #e8c66a;
+  --gold-deep: #a57b1d;
+
+  --muted: #5b6b84;
+  --line: #e4e8f0;
+  --surface: #ffffff;
+  --surface-tint: #fbf7ee;
+
+  --ring: #c9972b;
+
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-light: var(--brand-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep: var(--gold-deep);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-surface-tint: var(--surface-tint);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  --shadow-card: 0 1px 2px rgb(11 31 58 / 0.04), 0 12px 32px -16px rgb(11 31 58 / 0.18);
+  --shadow-card-hover: 0 2px 4px rgb(11 31 58 / 0.06), 0 28px 48px -24px rgb(11 31 58 / 0.3);
+  --shadow-gold: 0 10px 30px -10px rgb(201 151 43 / 0.55);
+  --shadow-nav: 0 8px 30px -18px rgb(11 31 58 / 0.45);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 35%, transparent);
+  color: var(--brand-strong);
+}
+
+/* Visible, premium keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+@utility heading-gradient {
+  background: linear-gradient(120deg, var(--brand-strong) 25%, var(--brand-light) 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gold-rule {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    color-mix(in srgb, var(--gold) 15%, transparent) 100%
+  );
+}
+
+/* Section rhythm — consistent spacing across the page */
+@utility section-pad {
+  padding-block: 4.5rem;
+  @media (width >= 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+/* ==========================================================================
+   Radix dialog polish (used by shadcn-style dialog primitive)
+   ========================================================================== */
+
+[data-radix-dialog-content] {
+  animation: dialog-in 0.24s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-radix-dialog-overlay] {
+  animation: overlay-in 0.2s ease;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
